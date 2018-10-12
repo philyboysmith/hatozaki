@@ -121,11 +121,19 @@ input[type="text"] {
 
 .form-row {
     display: flex;
+    flex-direction: column;
+}
+
+@media only screen and (orientation: landscape) {
+    .form-row {
+        flex-direction: row;
+    }
 }
 
 .form-row label {
     padding-right: 16px;
     display: flex;
+    margin-bottom: 1em;
 }
 
 .form-row input[type="checkbox"] {
@@ -159,10 +167,11 @@ input[type="checkbox"]:checked + span::before {
 
 
 .form-row button {
-    flex: 0 0 191px;
+    flex: 0 0 auto;
     background-color: #13223d;
     color: white;
     border-radius: 5px;
     border: 0;
     min-height: 55px;
+    width: 191;
 }
