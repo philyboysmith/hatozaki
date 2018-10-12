@@ -63,6 +63,7 @@ body {
     transform: translate(-43%, -58%);
     width: 29%;
     display: none;
+    cursor: pointer;
 }
 
 @media only screen and (orientation: landscape) {
