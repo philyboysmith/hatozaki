@@ -1,0 +1,48 @@
+<!doctype html>
+<html class="no-js" lang="">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Hatozaki | Japanse Blended Whisky</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="bower_components/normalize.css/normalize.css">
+    <link rel="stylesheet" href="bower_components/magnific-popup/dist/magnific-popup.css">
+    <link rel="stylesheet" href="main.css">
+    <script src="bower_components/jquery/dist/jquery.js"></script>
+    <script src="bower_components/magnific-popup/dist/jquery.magnific-popup.min.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <img src="assets/logo.png" id="logo" alt="Hatozaki" />
+        <img src="assets/mobile-house.png" onclick="showPopup()" id="mobile-house" alt="House" />
+
+
+        <img src="assets/desktop-text.png" onclick="showPopup()" id="desktop-text" alt="Sign up" /> <img src="assets/house.png" id="house"
+            alt="House"/>
+
+    </div>
+
+    <div id="overlay">
+        <form>
+            <input placeholder="Email address" type="text" required name="email" id="email" />
+            <div class="form-row">
+                <label><input type="checkbox" name="gdpr" required /><span></span>Please send me
+                    updateds about 135 east and keep me
+                    informed of future release dates</label>
+                <button type="submit">Submit</button>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        function showPopup(){
+            $('#overlay').fadeIn();
+            $('#email').focus();
+        }
+    </script>
+</body>
+
+</html>
