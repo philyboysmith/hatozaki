@@ -13,20 +13,23 @@
     <script src="bower_components/jquery/dist/jquery.js"></script>
     <script src="bower_components/magnific-popup/dist/jquery.magnific-popup.min.js"></script>
 </head>
+
 <body>
     <div class="container">
         <img src="assets/logo.png" id="logo" alt="Hatozaki" />
         <img src="assets/mobile-house.png" onclick="showPopup()" id="mobile-house" alt="House" />
 
 
-        <img src="assets/desktop-text.png" onclick="showPopup()" id="desktop-text" alt="Sign up" /> <img src="assets/house.png" id="house"
-            alt="House"/>
+        <img src="assets/desktop-text.png" onclick="showPopup()" id="desktop-text" alt="Sign up" /> <img src="assets/house.png"
+            id="house" alt="House" />
 
     </div>
 
     <div id="overlay">
-        <form>
-            <input placeholder="Email address" type="text" required name="email" id="email" />
+        <div id="overlay__bg" onclick="hidePopup()"></div>
+        <form action="https://docs.google.com/forms/d/1FAIpQLSfyd9qFoYYTRhLkg_3wKv7x81ZfwegChgt4-ZfybELtSmIX3g"
+            onsubmit="return window.submitGoogleForm(this);">
+            <input placeholder="Email address" type="text" required name="entry.514797449" id="email" />
             <div class="form-row">
                 <label><input type="checkbox" name="gdpr" required /><span></span>Please send me
                     updateds about 135 east and keep me
@@ -37,13 +40,44 @@
     </div>
 
     <script>
-        
-        function showPopup(){
+
+        function showPopup() {
             $('body').addClass('active');
             $('#overlay').fadeIn();
             $('#email').focus();
         }
-        
+
+        function hidePopup() {
+            $('body').removeClass('active');
+            $('#overlay').fadeOut();
+        }
+
+
+
+        function submitGoogleForm(form) {
+            try {
+                var data = [].slice.call(form).map(function (control) {
+                    return 'value' in control && control.name ?
+                        control.name + '=' + (control.value === undefined ? '' : control.value) :
+                        '';
+                }).join('&');
+                var xhr = new XMLHttpRequest();
+
+                xhr.open('POST', form.action + '/formResponse', true);
+                xhr.setRequestHeader('Accept',
+                    'application/xml, text/xml, */*; q=0.01');
+                xhr.setRequestHeader('Content-type',
+                    'application/x-www-form-urlencoded; charset=UTF-8');
+                xhr.send(data);
+            } catch (e) { }
+
+            form.parentNode.className += ' submitted';
+
+            return false;
+        }
+
+
+
     </script>
 </body>
 
