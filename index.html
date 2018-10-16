@@ -27,14 +27,17 @@
 
     <div id="overlay">
         <div id="overlay__bg" onclick="hidePopup()"></div>
-        <form action="https://docs.google.com/forms/d/1FAIpQLSfyd9qFoYYTRhLkg_3wKv7x81ZfwegChgt4-ZfybELtSmIX3g"
-            onsubmit="return window.submitGoogleForm(this);">
-            <input placeholder="Email address" type="text" required name="entry.514797449" id="email" />
-            <div class="form-row">
+        <form id="form" action="formhandler.php">
+            <input id="test" name="test" type="hidden"/>
+            <input placeholder="Email address" type="text" required name="email" id="email" />
+            <div class="form-row  form-row--first">
                 <label><input type="checkbox" name="gdpr" required /><span></span>Please send me
                     updateds about 135 east and keep me
                     informed of future release dates</label>
                 <button type="submit">Submit</button>
+            </div>
+            <div class="form-row  form-row--last" style="display: none;">
+                <p>Thanks. We've added you to our mailing list.</p>
             </div>
         </form>
     </div>
@@ -44,39 +47,35 @@
         function showPopup() {
             $('body').addClass('active');
             $('#overlay').fadeIn();
+            $('#test').val('12345');
             $('#email').focus();
         }
 
         function hidePopup() {
             $('body').removeClass('active');
             $('#overlay').fadeOut();
+            $('.form-row--last').hide();
+            $('.form-row--first').show();
         }
 
+        $("#form").submit(function (e) {
 
 
-        function submitGoogleForm(form) {
-            try {
-                var data = [].slice.call(form).map(function (control) {
-                    return 'value' in control && control.name ?
-                        control.name + '=' + (control.value === undefined ? '' : control.value) :
-                        '';
-                }).join('&');
-                var xhr = new XMLHttpRequest();
+            var form = $(this);
+            var url = form.attr('action');
 
-                xhr.open('POST', form.action + '/formResponse', true);
-                xhr.setRequestHeader('Accept',
-                    'application/xml, text/xml, */*; q=0.01');
-                xhr.setRequestHeader('Content-type',
-                    'application/x-www-form-urlencoded; charset=UTF-8');
-                xhr.send(data);
-            } catch (e) { }
+            $.ajax({
+                type: "POST",
+                url: url,
+                data: form.serialize(), // serializes the form's elements.
+                success: function (data) {
+                    $('.form-row--first').hide();
+                    $('.form-row--last').show();
+                }
+            });
 
-            form.parentNode.className += ' submitted';
-
-            return false;
-        }
-
-
+            e.preventDefault(); // avoid to execute the actual submit of the form.
+        });
 
     </script>
 </body>
